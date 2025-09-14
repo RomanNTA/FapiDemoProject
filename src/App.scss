@@ -7,14 +7,16 @@
     text-decoration: none;
 }
 
-body {
-    background-color: #ebfafc !important;
-    /* font-family: "Poppins" !important; */
-    color: #3498db !important;
-    font-family: "Varela Round", serif;
-    font-weight: 400;
-    font-style: normal;
-}
+@import "https://fonts.googleapis.com";
+@import "https://fonts.gstatic.com";
+@import "https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400..800&display=swap";
+
+// .baloo-tamma-2-regular {
+//     font-family: "Baloo Tamma 2", system-ui;
+//     font-optical-sizing: auto;
+//     font-weight: 400;
+//     font-style: normal;
+// }
 
 // /* "primary": #49516F, */
 // $theme-colors: (
@@ -36,8 +38,7 @@ body {
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 //@import "./color-palette.css";
-@import "https://fonts.googleapis.com/css2?family=Varela+Round&display=swap";
-//@import "bootstrap/dist/css/bootstrap.min.css";
+//@import "https://fonts.googleapis.com/css2?family=Varela+Round&display=swap";
 
 //@import "~leaflet/dist/leaflet.css";
 //@import "../node_modules/leaflet/dist/leaflet.css";
@@ -53,6 +54,62 @@ import "../../../node_modules/leaflet/dist/leaflet.css"; // Důležité pro styl
 //   width: 100%;
 //   height: 50vh;
 // }
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    background-color: #f8f1ea !important;
+    //font-family: "Poppins" !important;
+    color: #00385e !important;
+    // font-family: "Varela Round", serif;
+    //font-weight: 400;
+
+    font-family: "Baloo Tamma 2", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+// button,
+// [type="button"],
+// [type="reset"],
+// [type="submit"] {
+//     -webkit-appearance: button !important;
+//     appearance: button;
+// }
+
+main {
+    flex: 1 0 auto;
+    padding: 20px 0;
+}
+
+footer {
+    padding: 5px;
+    background-color: #333;
+    color: white;
+    height: 45px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: small;
+}
+
+.font-header {
+    font-family: "Baloo Tamma 2", system-ui;
+    font-weight: 900;
+    font-size: 2.5rem;
+    //color: #2c2e40 !important;
+    color: #ff5722 !important;
+    text-shadow: 2px 2px 3px 3px rgb(95, 94, 94);
+}
 
 .header {
     text-align: center;
@@ -78,123 +135,174 @@ import "../../../node_modules/leaflet/dist/leaflet.css"; // Důležité pro styl
 .f {
     border: 2px solid yellow;
 }
+
 /* -------------------  ------------------------- */
+// .n-tabs {
+//     background-color: rgb(171, 137, 137) !important;
+// }
+
+#Pages {
+    background-color: rgb(255, 255, 255) !important;
+    border-radius: 5px;
+    box-shadow: -2px -2px 20px 10px white;
+    margin-top: 20px;
+    padding: 20px;
+
+    border: 2px solid transparent !important;
+    border-radius: 30px !important;
+}
+
+#Pages .nav-item .nav-link {
+    background-color: rgb(255, 87, 34) !important;
+    color: white;
+    border-radius: 20px;
+    border: #f8f1ea 2px solid !important;
+    box-shadow: 2px 2px 3px 3px rgb(252, 169, 143);
+    // margin-top: 10px;
+    // padding: 10px;
+    margin: 10px;
+}
 
 .n-button {
-    box-shadow: inset -2px -2px 5px 2px #050505 !important;
-    color: #2c2e40;
-}
-.n-button:hover {
-    box-shadow: inset -1px -1px 2px 2px #050505 !important;
-    cursor: pointer;
-    color: #2c2e40;
-    scale: 1;
+    background-color: rgb(255, 87, 34) !important;
+    border: none;
 }
 
-textarea,
-input[type] {
-    font-size: small;
-    padding: 5px;
-    height: 22px;
+.border-h1 {
+    border-bottom: 3px solid rgb(255, 87, 34) !important;
+    width: fit-content;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    text-shadow: 2px 2px 3px 3px rgb(252, 169, 143);
 }
 
-.n-fs-small {
-    font-size: small !important;
-}
-
-label {
-    font-size: small;
-    height: 22px;
-}
-
-#TabsHandler > li {
-    color: navy;
-}
-#TabsHandler > li .active {
-    background-color: #c8def7aa !important;
-    color: navy;
-}
-
-#TabsHandlerForFile {
-    font-size: small !important;
-}
-
-#TabsHandlerForFile > li .active {
-    background-color: #c8f7d5aa !important;
-    color: navy;
-}
-#TabsHandlerForFile > li .active {
-    background-color: #c8f7d5aa !important;
-    color: navy;
-}
-
-.n-button:hover::after {
-    box-shadow: none !important;
-    cursor: pointer;
-    color: #2c2e40;
-    scale: 1;
-}
-
-.n-button:focus {
-    box-shadow: 0 0 2px 5px white;
-    filter: drop-shadow(0 0 5px #cfcfcf);
-}
-
-.n-button:focus:after {
-    background-color: #e92fe9;
-    box-shadow: none !important;
-    color: #2c2e40;
-}
-
-.n-sirka {
-    width: 800px;
-    min-height: 400px;
-
-    height: 100%;
-    margin: 0 auto;
-}
-
-.bg-container {
-    background-color: burlywood;
-}
-
-.overflow-map {
-    height: 100vh;
-    width: 100vw;
-    // overflow: scroll;
-    background-size: cover;
-    background-position: center;
-}
-
-.leaflet-container {
-    height: 100vh;
-    width: 100vw;
-    // overflow: scroll;
-}
-
-.n-panel-parent {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    // border: 3px solid red;
-}
-
-.n-pointer-events-none {
-    pointer-events: none;
-}
-
-.n-pointer-events-all {
-    pointer-events: all;
-}
-
-.n-panel {
-    background-color: #66acd490 !important;
+.n-button-send {
+    background-color: rgb(255, 87, 34) !important;
+    border: #f8f1ea 2px solid !important;
     border-radius: 20px;
-    box-shadow: -2px -2px 20px 10px white;
+    box-shadow: 2px 2px 3px 3px rgb(252, 169, 143);
+    margin: 10px;
+    padding: 10px 20px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+
+    transition: all 0.2s ease-in-out;
+    scale: 1.05;
 }
+
+
+// .n-button:hover {
+//     box-shadow: inset -1px -1px 2px 2px #050505 !important;
+//     cursor: pointer;
+//     color: #2c2e40;
+//     scale: 1;
+// }
+
+// .n-button:hover::after {
+//     box-shadow: none !important;
+//     cursor: pointer;
+//     color: #2c2e40;
+//     scale: 1;
+// }
+
+// .n-button:focus {
+//     box-shadow: 0 0 2px 5px white;
+//     filter: drop-shadow(0 0 5px #cfcfcf);
+// }
+
+// .n-button:focus:after {
+//     background-color: #e92fe9;
+//     box-shadow: none !important;
+//     color: #2c2e40;
+// }
+
+// textarea,
+// input[type] {
+//     font-size: small;
+//     padding: 5px;
+//     height: 22px;
+// }
+
+// .n-fs-small {
+//     font-size: small !important;
+// }
+
+// label {
+//     font-size: small;
+//     height: 22px;
+// }
+
+// #TabsHandler > li {
+//     color: navy;
+// }
+// #TabsHandler > li .active {
+//     background-color: #c8def7aa !important;
+//     color: navy;
+// }
+
+// #TabsHandlerForFile {
+//     font-size: small !important;
+// }
+
+// #TabsHandlerForFile > li .active {
+//     background-color: #c8f7d5aa !important;
+//     color: navy;
+// }
+// #TabsHandlerForFile > li .active {
+//     background-color: #c8f7d5aa !important;
+//     color: navy;
+// }
+
+// .n-sirka {
+//     width: 800px;
+//     min-height: 400px;
+
+//     height: 100%;
+//     margin: 0 auto;
+// }
+
+// .bg-container {
+//     background-color: burlywood;
+// }
+
+// .overflow-map {
+//     height: 100vh;
+//     width: 100vw;
+//     // overflow: scroll;
+//     background-size: cover;
+//     background-position: center;
+// }
+
+// .leaflet-container {
+//     height: 100vh;
+//     width: 100vw;
+//     // overflow: scroll;
+// }
+
+// .n-panel-parent {
+//     position: absolute;
+//     top: 0px;
+//     left: 0px;
+//     width: 100vw;
+//     height: 100vh;
+//     pointer-events: none;
+//     // border: 3px solid red;
+// }
+
+// .n-pointer-events-none {
+//     pointer-events: none;
+// }
+
+// .n-pointer-events-all {
+//     pointer-events: all;
+// }
+
+// .n-panel {
+//     background-color: #66acd490 !important;
+//     border-radius: 20px;
+//     box-shadow: -2px -2px 20px 10px white;
+// }
 
 // .n-panel {
 //   position: relative;
@@ -218,48 +326,44 @@ label {
 //   z-index: 3;
 // }
 
-.leaflet-control {
-    z-index: 0 !important;
-}
-.leaflet-pane {
-    z-index: 0 !important;
-}
-.leaflet-top,
-.leaflet-bottom {
-    z-index: 0 !important;
-}
+// .leaflet-control {
+//     z-index: 0 !important;
+// }
+// .leaflet-pane {
+//     z-index: 0 !important;
+// }
+// .leaflet-top,
+// .leaflet-bottom {
+//     z-index: 0 !important;
+// }
 
-/* .n-form-range {
+// #karty .nav-item .active {
+//     border-bottom: 2px solid navy;
+// }
 
-}
- */
-#karty .nav-item .active {
-    border-bottom: 2px solid navy;
-}
+// .n-color-settings {
+//     background-color: rgba(68, 83, 159, 0.491) !important;
+//     color: black !important;
+// }
 
-.n-color-settings {
-    background-color: rgba(68, 83, 159, 0.491) !important;
-    color: black !important;
-}
+// .n-card {
+//     position: relative;
+//     display: inline-block;
+//     top: 20px;
+//     width: 100%;
+//     height: 100%;
+//     border: 5px solid red;
+// }
 
-.n-card {
-    position: relative;
-    display: inline-block;
-    top: 20px;
-    width: 100%;
-    height: 100%;
-    border: 5px solid red;
-}
+// .n-text-wrap {
+//     text-overflow: ellipsis !important;
+//     overflow: hidden !important;
+//     min-height: fit-content !important;
+// }
 
-.n-text-wrap {
-    text-overflow: ellipsis !important;
-    overflow: hidden !important;
-    min-height: fit-content !important;
-}
-
-.n-color1 {
-    background-color: rgba(68, 83, 159, 0.491) !important;
-}
+// .n-color1 {
+//     background-color: rgba(68, 83, 159, 0.491) !important;
+// }
 
 // .modal-backdrop {
 //   background-color: rgba(

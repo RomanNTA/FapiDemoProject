@@ -1,0 +1,53 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Rybíz červený",
+            "desc": "Červený rybíz, vanička, 125 g.",
+            "price": 59.9,
+            "img": "id1-860x800x1_5s2pq243pmp7.webp"
+        },
+        {
+            "id": 2,
+            "name": "Pomeranče BIO",
+            "desc": "Pomeranče BIO čerstvé, balení 0.5 kg.",
+            "price": 64.9,
+            "img": "id2-860x800x1_deydru9uvk08.webp"
+        },
+        {
+            "id": 3,
+            "name": "Granátové jablko, 2 ks na tácku",
+            "desc": "Granátové jablko",
+            "price": 139.9,
+            "img": "id3-860x800x1_9skw5wb1eh32.webp"
+        },
+        {
+            "id": 4,
+            "name": "Švestky, vanička",
+            "desc": "Švestky či slivoň nebo také slívy, vanička, 1 kg.",
+            "price": 59.9,
+            "img": "id4-860x800x1_i1cvy8apzu5u.webp"
+        },
+        {
+            "id": 5,
+            "name": "Borůvky vanička",
+            "desc": "Borůvky.",
+            "price": 59.9,
+            "img": "id5-860x800x1_66fl80y6s3lb.webp"
+        },
+        {
+            "id": 6,
+            "name": "Pomeranč, 1 ks",
+            "desc": "Pomeranč Navelina, 1 ks, cca 200 g.",
+            "price": 14.38,
+            "img": "id6-860x800x1_hzy72sxryc5c.webp"
+        },
+        {
+            "id": 7,
+            "name": "Kiwi, vanička",
+            "desc": "Kiwi nebo také Čínský angrešt, angrešt Číňana či opičí broskve.",
+            "price": 159.9,
+            "img": "id7-860x800x1_zhimwzmqe988.webp"
+        }
+    ]
+}

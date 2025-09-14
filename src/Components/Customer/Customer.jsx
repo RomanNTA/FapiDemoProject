@@ -12,26 +12,13 @@ import {
 
 function Customer({ setDataCustomer }) {
     // const EMAIL_REGEX =
-    //     '^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$';
+    const EMAIL_REGEX = /\b[\w\.-]+@([\w\.-]+\.\w{2,4}\b)/;
 
-    // Email Validation as per RFC2822 standards.
-    //[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    // Email Validation as per RFC2822 standards .... upravený pro CHROME
-    const EMAIL_REGEX = /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/;
-    // const EMAIL_REGEX =
-    //     /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-
-    //const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-z]{2,4}/;
-    //const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-z]{2,4}/;
-
-    // Alfanumerické znaky + diakritika
-    //    const PLAIN_TEXT_REGEX.source = "^[a-zA-Z0-9À-ž\\s\\-]+$";
-    //const PLAIN_TEXT_REGEX = "^[\\w\\-\\s\\-]+$";
-
+    // Alfanumerické znaky + diakritika + mezera
     const PLAIN_TEXT_REGEX = /^[a-zA-Z0-9À-ž\s]+$/;
-    // \s\.\-\/
-    // Alfanumerické znaky + diakritika
-    const STREET_REGEX = /^[a-zA-Z0-9À-ž\.\/\-\s]+$/;
+
+    // Alfanumerické znaky + diakritika + mezera + pomlčka a lomítko
+    const STREET_REGEX = /^[a-zA-Z0-9À-ž\s-/]+$/;
 
     // Telefonní číslo 9 číslic
     const PHONE_REGEX = /^\d{9}$/;
@@ -53,50 +40,34 @@ function Customer({ setDataCustomer }) {
     const [validated, setValidated] = useState(false);
 
     const handleSubmit = (event) => {
-        const ev = event;
+        event.preventDefault();
+        event.stopPropagation();
         const form = event.currentTarget;
-        //event.preventDefault();
-
-        console.log("Vstup -> handleSubmit");
-        console.log(form);
-        console.log(ev);
-
-        // console.log(EMAIL_REGEX);
-        // console.log(EMAIL_REGEX.source);
-        console.log(dataForm);
 
         try {
             if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
                 console.log("Chyba ve formuláři !");
-                return false;
+            } else {
+                let tmp = { ...dataForm, isValid: true };
+                console.log(tmp);
+                setDataCustomer(tmp);
             }
         } catch (error) {
-            // event.preventDefault();
-            // event.stopPropagation();
-            //console.log("Chyba ve formuláři !");
-            //return false;
+            console.log("Vyjímka ve formuláři !");
+            console.log(error);
         }
 
         console.log("Odesílám formulář !");
-        //setValidated(true);
-
-        let tmp = { ...dataForm, isValid: true };
-        console.log(tmp);
-        //setDataCustomer(tmp);
+        setValidated(true);
     };
 
     /**
      * metoda handleInputForm
      */
     const handleInputForm = (e) => {
-        //console.log("Vstup -> handleInputForm");
         const [val, name, id] = [e.target.value, e.target.name, e.target.id];
-        //        console.log(val + " - " + name + " - " + id);
         let tmp = { ...dataForm, [name]: val };
         setDataForm(tmp);
-        console.log(tmp);
     };
 
     //        <Form noValidate validated={validated}  onInvalid={handleSubmit}>
@@ -105,15 +76,16 @@ function Customer({ setDataCustomer }) {
         <>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 {/* Nový řádek */}
+
                 <Row>
                     {/* ------------------ FIRST NAME ------------------ */}
-                    <Form.Group as={Col} md='6'>
+                    <Form.Group as={Col} md='6' className=''>
                         <FloatingLabel
                             controlId='idFirstName'
-                            label='jméno'
+                            label='&nbsp;&nbsp;&nbsp;jméno'
                             className='mb-3 text-warning'>
                             <Form.Control
-                                className='bg-white'
+                                className='bg-white rounded-5 ps-4'
                                 type='text'
                                 name='firstName'
                                 onChange={handleInputForm}
@@ -132,9 +104,10 @@ function Customer({ setDataCustomer }) {
                     <Form.Group as={Col} md='6'>
                         <FloatingLabel
                             controlId='idLastName'
-                            label='příjmení'
+                            label='&nbsp;&nbsp;&nbsp;příjmení'
                             className='mb-3'>
                             <Form.Control
+                                className='bg-white rounded-5 ps-4'
                                 type='text'
                                 name='lastName'
                                 onChange={handleInputForm}
@@ -156,9 +129,10 @@ function Customer({ setDataCustomer }) {
                     <Form.Group as={Col} md='3'>
                         <FloatingLabel
                             controlId='idPhone'
-                            label='telefonní číslo'
+                            label='&nbsp;&nbsp;&nbsp;telefonní číslo'
                             className='mb-3'>
                             <Form.Control
+                                className='bg-white rounded-5 ps-4'
                                 type='text'
                                 name='phone'
                                 min={0}
@@ -177,10 +151,11 @@ function Customer({ setDataCustomer }) {
                     <Form.Group as={Col} md='9'>
                         <FloatingLabel
                             controlId='idEmail'
-                            label='platná emailová adresa'
+                            label='&nbsp;&nbsp;&nbsp;platná emailová adresa'
                             className='mb-3'>
                             <Form.Control
-                                type='text'
+                                className='bg-white rounded-5 ps-4'
+                                type='email'
                                 name='email'
                                 onChange={handleInputForm}
                                 required
@@ -201,9 +176,10 @@ function Customer({ setDataCustomer }) {
                     <Form.Group as={Col} md='5'>
                         <FloatingLabel
                             controlId='idStreet'
-                            label='Ulice'
+                            label='&nbsp;&nbsp;&nbsp;Ulice'
                             className='mb-3'>
                             <Form.Control
+                                className='bg-white rounded-5 ps-4'
                                 type='text'
                                 name='street'
                                 required
@@ -222,9 +198,10 @@ function Customer({ setDataCustomer }) {
                     <Form.Group as={Col} md='5'>
                         <FloatingLabel
                             controlId='idCity'
-                            label='Město'
+                            label='&nbsp;&nbsp;&nbsp;Město'
                             className='mb-3'>
                             <Form.Control
+                                className='bg-white rounded-5 ps-4'
                                 type='text'
                                 name='city'
                                 required
@@ -242,9 +219,10 @@ function Customer({ setDataCustomer }) {
                     <Form.Group as={Col} md='2'>
                         <FloatingLabel
                             controlId='idZipCode'
-                            label='PSČ'
+                            label='&nbsp;&nbsp;&nbsp;PSČ'
                             className='mb-3'>
                             <Form.Control
+                                className='bg-white rounded-5 ps-4'
                                 type='text'
                                 name='zipCode'
                                 required
@@ -261,7 +239,13 @@ function Customer({ setDataCustomer }) {
                     </Form.Group>
                 </Row>
 
-                <Button type='submit'>Výběr zboží</Button>
+                <Col className='d-flex justify-content-center m-5'>
+                    <Button
+                        type='submit'
+                        className='n-button-send  rounded-5 px-4 py-2 fw-bold'>
+                        Mám hotovo ... ukaž mi ovoce
+                    </Button>
+                </Col>
             </Form>
         </>
     );

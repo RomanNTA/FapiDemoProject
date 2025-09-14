@@ -1,0 +1,25 @@
+.oops-font-color {
+    color: #ff0000;
+}
+.oops-background-color {
+    border: transparent!important;
+    background-color: transparent!important;
+}
+
+.oops-block{
+
+    background-color: #f8f1ea !important;
+    border-radius: 50px;
+
+}
+
+
+/* h-100 rounded-5 border border-3 border-danger */
+
+
+.but-agree {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #34495e !important;
+    background-color: #34495e !important;
+} 

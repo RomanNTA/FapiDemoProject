@@ -1,0 +1,73 @@
+.font1,
+.font2,
+.font3,
+.font4,
+.font5 {
+    color: rgb(32, 37, 138) !important;
+    /* font-family: "Baloo Tamma 2", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 800;
+
+    font-style: normal; */
+}
+
+.font1 {
+    font-size: small;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.font2 {
+    font-size: 0.8rem;
+    /* color: rgb(82, 81, 81); */
+}
+
+.font3 {
+    font-size: 1.3rem;
+    text-align: right !important;
+    font-weight: 800;
+}
+
+.font4 {
+    font-size: 1.3rem !important;
+    font-weight: 800;
+}
+
+.font5 {
+    font-size: 1.3rem !important;
+    font-weight: 800;
+    text-align: center !important;
+    text-shadow: 0px 0px 10px rgb(155, 155, 155);
+}
+
+.currency,
+.decimal-part {
+    font-weight: 400;
+}
+
+.decimal-part {
+    font-size: 0.9rem;
+}
+
+.border1 {
+    border: 0;
+    border-top: 1px solid rgb(112, 112, 112);
+}
+
+.color-white {
+    background-color: rgb(255, 255, 255);
+}
+
+.color-text {
+    color: rgb(2, 1, 39);
+}
+
+.but-add {
+    background-color: rgb(255, 87, 34);
+    color: white;
+    border: none;
+}
+
+.card-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
