@@ -33,8 +33,6 @@ function Cart() {
 
             {isNaN(D.dataShoppingCart) && (
                 <Col className='mt-3'>
-                    <h3>Rekapitulace objednávky</h3>
-
                     {Array.from(D.dataShoppingCart.entries()).map(
                         ([id, countProducts]) => {
                             let product = D.dataProduct?.find(
@@ -44,10 +42,10 @@ function Cart() {
                                 <Card key={id} className='w-100 m-1 p-1'>
                                     <Card.Body>
                                         <Col md={12} className='d-flex w-100 '>
-                                            <Col md='1' className='d p-1'>
+                                            <Col md={2} className='p-1'>
                                                 <Card.Img
                                                     variant='left'
-                                                    className='b object-fit card-img '
+                                                    className='object-fit card-img '
                                                     src={
                                                         "./image/products/" +
                                                         product?.img
@@ -55,7 +53,7 @@ function Cart() {
                                                 />
                                             </Col>
                                             <Col
-                                                md={7}
+                                                md={5}
                                                 className='d p-1 ps-3 pt-3'>
                                                 <Card.Title>
                                                     {product?.name}
@@ -64,14 +62,20 @@ function Cart() {
                                                     {product?.desc}
                                                 </Card.Text>
                                             </Col>
-                                            <Col className='d'>
+                                            <Col
+                                                md={5}
+                                                className='d p-1 ps-3 pt-3'>
                                                 <Card.Text>
-                                                    {product?.desc}
+                                                    <p className='c m-0 d-flex justify-content-end'>{`${Number(
+                                                        product?.price
+                                                    ).toFixed(2)} Kč`}</p>
+                                                    <p className='c m-0 d-flex justify-content-end'>
+                                                        {`${countProducts} ks/bal   ${Number(
+                                                            product?.price *
+                                                                countProducts
+                                                        ).toFixed(2)} Kč`}
+                                                    </p>
                                                 </Card.Text>
-                                                <Card.Link href='#'>
-                                                    Another Link -{" "}
-                                                    {countProducts}
-                                                </Card.Link>
                                             </Col>
                                         </Col>
                                     </Card.Body>

@@ -1,13 +1,15 @@
 import { useState, createContext } from "react";
 import { DataContext } from "./GlobalContext";
 import "./App.css";
-import { Container, Row, Button, Tab, Tabs } from "react-bootstrap";
+import { Container, Row, Button, Tab, Tabs, Col } from "react-bootstrap";
 import Customer from "./Components/Customer/Customer";
 import Opening from "./Components/Opening/Opening";
 import SelectGoods from "./Components/SelectGoods/SelectGoods";
 import OffCanvasExample from "./Components/Oops/Oops";
 import Cart from "./Components/Cart/Cart";
 import LoadCurrencyRates from "./Functions/LoadCurrencyRates";
+import Summary from "./Components/Summary/Summary";
+import SelectRates from "./Components/SelectRates/SelectRates";
 
 import rawData from "./productData.json";
 
@@ -15,12 +17,13 @@ import rawData from "./productData.json";
  * Komponenta App - hlavní komponenta aplikace
  */
 function App() {
+    //
     const [activeTab, setActiveTab] = useState("tab1");
-
     const [dataCustomer, setDataCustomer] = useState({});
     const [dataProduct, setDataProduct] = useState(rawData.products);
     const [dataShoppingCart, setDataShoppingCart] = useState(new Map());
     const [showOops, setShowOops] = useState(false);
+    const [dataCurrencyRates, setDataCurrencyRates] = useState({});
 
     /**
      * metoda handleRegister přijímá data z komponenty Customer.jsx a ukládá je do stavu dataCustomer
@@ -37,8 +40,6 @@ function App() {
 
         // Nabídneme uživateli přechod na další záložku
         setActiveTab("tab3");
-
-        await LoadCurrencyRates();
     };
 
     /**
@@ -49,7 +50,7 @@ function App() {
         console.log(product);
         console.log(countProducts);
 
-        // přišla nula počet nebo null,NaN
+        // přišla nula počet nebo null, NaN
         if (!Number.parseInt(countProducts)) {
             console.log("addToCart : přišla nula počet nebo null, NaN");
             console.log(product);
@@ -86,6 +87,7 @@ function App() {
             `Přidáno do košíku ${product.id}: ${product.name} - ${countProducts} ks/bal.`
         );
 
+        SelectRates();
         console.log(newStatus);
     };
 
@@ -153,9 +155,18 @@ function App() {
                             </div>
                         </Tab>
                         {/* ---------------------------------------------------------------------- */}
-                        <Tab eventKey='tab4' title='3. Objednávka' className=''>
+                        <Tab
+                            eventKey='tab4'
+                            title='3. Objednávka'
+                            className='my-2'>
+                            <h3>Rekapitulace objednávky</h3>
                             <div className='row justify-content-center mb-3'>
-                                <Cart />
+                                <Col md={6} className='b'>
+                                    <Cart />
+                                </Col>
+                                <Col md={6} className='c'>
+                                    <Summary />
+                                </Col>
                             </div>
                         </Tab>
                         {/* ---------------------------------------------------------------------- */}
