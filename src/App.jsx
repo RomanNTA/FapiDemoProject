@@ -1,15 +1,14 @@
-import { useState, createContext } from "react";
-import { DataContext } from "./GlobalContext";
+import {useState, createContext} from "react";
+import {DataContext} from "./GlobalContext";
 import "./App.css";
-import { Container, Row, Button, Tab, Tabs, Col } from "react-bootstrap";
+import {Container, Row, Button, Tab, Tabs, Col} from "react-bootstrap";
 import Customer from "./Components/Customer/Customer";
 import Opening from "./Components/Opening/Opening";
 import SelectGoods from "./Components/SelectGoods/SelectGoods";
-import OffCanvasExample from "./Components/Oops/Oops";
-import Cart from "./Components/Cart/Cart";
-import LoadCurrencyRates from "./Functions/LoadCurrencyRates";
+import Oops from "./Components/Oops/Oops";
+import FullCart from "./Components/FullCart/FullCart";
 import Summary from "./Components/Summary/Summary";
-import SelectRates from "./Components/SelectRates/SelectRates";
+import LoadCurrencyRates from "./Components/LoadCurrencyRates/LoadCurrencyRates";
 
 import rawData from "./productData.json";
 
@@ -23,26 +22,23 @@ function App() {
     const [dataProduct, setDataProduct] = useState(rawData.products);
     const [dataShoppingCart, setDataShoppingCart] = useState(new Map());
     const [showOops, setShowOops] = useState(false);
-    const [dataCurrencyRates, setDataCurrencyRates] = useState({});
+    const [dataCurrencyRates, setDataCurrencyRates] = useState(null);
+    const [selectedCurrency, setSelectedCurrency] = useState(0);
 
     /**
      * metoda handleRegister přijímá data z komponenty Customer.jsx a ukládá je do stavu dataCustomer
      */
     const handleRegister = async (values) => {
-        console.log(
-            "Vstup -> handleRegister přijímá data z komponenty Customer.jsx a ukládá je do stavu dataCustomer"
-        );
+        console.log("Vstup -> handleRegister přijímá data z komponenty Customer.jsx a ukládá je do stavu dataCustomer");
         setDataCustomer(values);
-        console.log(
-            "Vstup -> dataCustomer ... Nyní by registrace měla být v pořádku."
-        );
+        console.log("Vstup -> dataCustomer ... Nyní by registrace měla být v pořádku.");
         console.log(values);
 
         // Nabídneme uživateli přechod na další záložku
         setActiveTab("tab3");
     };
 
-    /**
+    /** *******************************************************************************
      * metoda addToCart přidá vybrané zboží do košíku
      */
     const addToCart = (product, countProducts) => {
@@ -59,9 +55,7 @@ function App() {
 
         // Je registrovaný ? Můžeme vložit do košíku ?
         if (isNaN(dataCustomer) && !dataCustomer.isValid) {
-            console.log(
-                "addToCart : Je registrovaný ? Můžeme vložit do košíku ?"
-            );
+            console.log("addToCart : Je registrovaný ? Můžeme vložit do košíku ?");
             console.log(dataCustomer);
             setShowOops(true);
             return;
@@ -71,23 +65,19 @@ function App() {
         console.log(countProducts);
         console.log(dataShoppingCart);
 
+        let newStatus;
         // přidání do košíku. Pokud je již obsažena položka, přičteme
         setDataShoppingCart((prev) => {
             const newStatus = new Map(prev);
             newStatus.set(
                 product.id,
-                Number.parseInt(newStatus.get(product.id) || 0) +
-                    Number.parseInt(countProducts || 0)
+                Number.parseInt(newStatus.get(product.id) || 0) + Number.parseInt(countProducts || 0)
             );
             console.log(newStatus);
             return newStatus;
         });
 
-        console.log(
-            `Přidáno do košíku ${product.id}: ${product.name} - ${countProducts} ks/bal.`
-        );
-
-        SelectRates();
+        console.log(`Přidáno do košíku ${product.id}: ${product.name} - ${countProducts} ks/bal.`);
         console.log(newStatus);
     };
 
@@ -107,6 +97,11 @@ function App() {
         dataShoppingCart,
         setDataShoppingCart,
 
+        dataCurrencyRates,
+        setDataCurrencyRates,
+        selectedCurrency,
+        setSelectedCurrency,
+
         addToCart,
     };
 
@@ -117,9 +112,7 @@ function App() {
         <>
             <Container className=''>
                 <Row className='justify-content-center'>
-                    <h1 className='mt-4 mb-3 border-h1 font-header'>
-                        Máme pro Vás košík plný ovoce
-                    </h1>
+                    <h1 className='mt-4 mb-3 border-h1 font-header'>Máme pro Vás košík plný ovoce</h1>
                 </Row>
             </Container>
 
@@ -132,56 +125,38 @@ function App() {
                         activeKey={activeTab}
                         onSelect={(k) => setActiveTab(k)}>
                         {/* ---------------------------------------------------------------------- */}
-                        <Tab
-                            eventKey='tab1'
-                            title='Vítejte !!!'
-                            className='n-tabs'>
+                        <Tab eventKey='tab1' title='Vítejte !!!' className='n-tabs'>
                             <Opening />
                         </Tab>
                         {/* ---------------------------------------------------------------------- */}
-                        <Tab
-                            eventKey='tab2'
-                            title='1. Registrace nakupujícího'
-                            className='n-tabs pt-5'>
+                        <Tab eventKey='tab2' title='1. Registrace nakupujícího' className='n-tabs pt-5'>
                             <Customer setDataCustomer={handleRegister} />
                         </Tab>
                         {/* ---------------------------------------------------------------------- */}
-                        <Tab
-                            eventKey='tab3'
-                            title='2. Výběr ovoce'
-                            className=''>
+                        <Tab eventKey='tab3' title='2. Výběr ovoce' className=''>
                             <div className='row justify-content-center mb-3'>
                                 <SelectGoods />
                             </div>
                         </Tab>
                         {/* ---------------------------------------------------------------------- */}
-                        <Tab
-                            eventKey='tab4'
-                            title='3. Objednávka'
-                            className='my-2'>
-                            <h3>Rekapitulace objednávky</h3>
+                        <Tab eventKey='tab4' title='3. Objednávka' className='my-2'>
+                            <div className='d-flex justify-content-center'>
+                                <h3 className='headColor'>Rekapitulace objednávky</h3>
+                            </div>
                             <div className='row justify-content-center mb-3'>
-                                <Col md={6} className='b'>
-                                    <Cart />
+                                <Col md={6} className=''>
+                                    <FullCart />
                                 </Col>
-                                <Col md={6} className='c'>
+                                <Col md={6} className=''>
+                                    <LoadCurrencyRates />
                                     <Summary />
                                 </Col>
                             </div>
                         </Tab>
                         {/* ---------------------------------------------------------------------- */}
-                        <Tab eventKey='tab5' title='4. Platba' className=''>
-                            <div className='row justify-content-center mb-3'>
-                                Výběr zboží
-                            </div>
-                        </Tab>
-                        {/* ---------------------------------------------------------------------- */}
                     </Tabs>
                 </Container>
-                <OffCanvasExample
-                    show={showOops}
-                    handleClose={handleCloseOops}
-                />
+                <Oops show={showOops} handleClose={handleCloseOops} />
             </DataContext.Provider>
 
             {/* mt-auto py-3 bg-light */}

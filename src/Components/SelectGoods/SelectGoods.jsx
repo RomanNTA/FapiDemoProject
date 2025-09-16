@@ -90,6 +90,8 @@ function SelectGoods() {
                                 onClick={() =>
                                     D.addToCart(i, countProducts[i.id])
                                 }>
+                                {/* d-flex align-items-center
+                                    justify-content-center  */}
                                 Do košíku
                             </Button>
                         </Col>

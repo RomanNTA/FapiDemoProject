@@ -12032,7 +12032,7 @@ footer {
   font-family: "Baloo Tamma 2", system-ui;
   font-weight: 900;
   font-size: 2.5rem;
-  color: #ff5722 !important;
+  color: rgb(255, 87, 34) !important;
   text-shadow: 2px 2px 3px 3px rgb(95, 94, 94);
 }
 
@@ -12061,7 +12061,10 @@ footer {
   border: 2px solid yellow;
 }
 
-/* -------------------  ------------------------- */
+.headColor {
+  color: rgb(255, 87, 34) !important;
+}
+
 #Pages {
   background-color: rgb(255, 255, 255) !important;
   border-radius: 5px;
@@ -12105,6 +12108,32 @@ footer {
   color: white;
   font-size: large;
   font-weight: bold;
-  transition: all 0.2s ease-in-out;
-  scale: 1.05;
+  transition: all 0.5s ease-in-out;
+}
+
+.n-button-rate {
+  background-color: rgb(255, 87, 34) !important;
+  border: #f8f1ea 2px solid !important;
+  border-radius: 20px;
+  box-shadow: 2px 2px 3px 3px rgb(252, 169, 143);
+  margin: 10px;
+  padding: 7px 25px;
+  color: white;
+  font-size: medium;
+  transition: all 0.5s ease-in-out;
+}
+
+.icon-plus,
+.icon-minus,
+.icon-remove {
+  color: #999999;
+  font-size: 1.2rem;
+  font-weight: 500;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+          user-select: none !important;
+}
+
+.icon-remove {
+  color: #ff0000;
 }/*# sourceMappingURL=App.css.map */

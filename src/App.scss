@@ -1,3 +1,5 @@
+$headColor: rgb(255, 87, 34) !default;
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -77,14 +79,6 @@ body {
     font-style: normal;
 }
 
-// button,
-// [type="button"],
-// [type="reset"],
-// [type="submit"] {
-//     -webkit-appearance: button !important;
-//     appearance: button;
-// }
-
 main {
     flex: 1 0 auto;
     padding: 20px 0;
@@ -106,8 +100,7 @@ footer {
     font-family: "Baloo Tamma 2", system-ui;
     font-weight: 900;
     font-size: 2.5rem;
-    //color: #2c2e40 !important;
-    color: #ff5722 !important;
+    color: $headColor !important;
     text-shadow: 2px 2px 3px 3px rgb(95, 94, 94);
 }
 
@@ -136,10 +129,9 @@ footer {
     border: 2px solid yellow;
 }
 
-/* -------------------  ------------------------- */
-// .n-tabs {
-//     background-color: rgb(171, 137, 137) !important;
-// }
+.headColor {
+    color: $headColor !important;
+}
 
 #Pages {
     background-color: rgb(255, 255, 255) !important;
@@ -153,7 +145,7 @@ footer {
 }
 
 #Pages .nav-item .nav-link {
-    background-color: rgb(255, 87, 34) !important;
+    background-color: $headColor !important;
     color: white;
     border-radius: 20px;
     border: #f8f1ea 2px solid !important;
@@ -164,12 +156,12 @@ footer {
 }
 
 .n-button {
-    background-color: rgb(255, 87, 34) !important;
+    background-color: $headColor !important;
     border: none;
 }
 
 .border-h1 {
-    border-bottom: 3px solid rgb(255, 87, 34) !important;
+    border-bottom: 3px solid $headColor !important;
     width: fit-content;
     margin-bottom: 10px;
     padding-bottom: 5px;
@@ -177,7 +169,7 @@ footer {
 }
 
 .n-button-send {
-    background-color: rgb(255, 87, 34) !important;
+    background-color: $headColor !important;
     border: #f8f1ea 2px solid !important;
     border-radius: 20px;
     box-shadow: 2px 2px 3px 3px rgb(252, 169, 143);
@@ -187,10 +179,33 @@ footer {
     font-size: large;
     font-weight: bold;
 
-    transition: all 0.2s ease-in-out;
-    scale: 1.05;
+    transition: all 0.5s ease-in-out;
 }
 
+.n-button-rate {
+    background-color: $headColor !important;
+    border: #f8f1ea 2px solid !important;
+    border-radius: 20px;
+    box-shadow: 2px 2px 3px 3px rgb(252, 169, 143);
+    margin: 10px;
+    padding: 7px 25px;
+    color: white;
+    font-size: medium;
+    transition: all 0.5s ease-in-out;
+}
+
+.icon-plus,
+.icon-minus,
+.icon-remove {
+    color: #999999;
+    font-size: 1.2rem;
+    font-weight: 500;
+    user-select: none !important;
+}
+
+.icon-remove {
+    color: #ff0000;
+}
 
 // .n-button:hover {
 //     box-shadow: inset -1px -1px 2px 2px #050505 !important;
