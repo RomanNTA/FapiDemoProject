@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# Všechno pod /cnbapi/ pošli na PHP proxy
+RewriteRule ^cnbapi/(.*)$ cnbapi/index.php [L,QSA]
+

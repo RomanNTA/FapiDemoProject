@@ -1,10 +1,9 @@
 import React from "react";
 import "./FullCart.css";
-import {useState, useContext} from "react";
+import {useContext} from "react";
 import {DataContext} from "../../GlobalContext";
-import {Container, Col, Button, Card, ListGroup} from "react-bootstrap";
+import {Container, Col, Card} from "react-bootstrap";
 import {FiPlusSquare, FiMinusSquare} from "react-icons/fi";
-import {CiSquareRemove} from "react-icons/ci";
 import {MdOutlineRemoveShoppingCart} from "react-icons/md";
 function FullCart() {
     const D = useContext(DataContext);
@@ -13,6 +12,7 @@ function FullCart() {
      * metoda handleKlik
      */
 
+    // Přepočet     
     const calculate = (productPrice, countProducts) => {
         if (!D.dataCurrencyRates) return;
         let rat = D.dataCurrencyRates[D.selectedCurrency || 0];
@@ -20,35 +20,35 @@ function FullCart() {
         return `${Number(result).toFixed(2)} ${rat.currencyCode}`;
     };
 
+    // Vymaže položku z košíku
     const removeProduct = (id) => {
-        let tmp = new Map(D.dataShoppingCart);
-        tmp.delete(id);
-        D.setDataShoppingCart(tmp);
+        //
+        D.setDataShoppingCart((prev) => {
+            const tmp = new Map(prev);
+            tmp.delete(id);
+            return tmp;
+        });
     };
 
-    // const increaseProduct = (id) => {
-    //     let tmp = new Map(D.dataShoppingCart);
-    //     let volume = tmp.get(id);
-    //     volume++;
-    //     tmp.set(id, volume);
-    //     D.setDataShoppingCart(tmp);
-    // };
-
+    // Navýší položku +1
     const increaseProduct = (id) => {
         D.setDataShoppingCart((prev) => {
-            const tmp = new Map(prev); // kopie předchozí mapy
-            let volume = tmp.get(id) ?? 0; // pokud tam není, tak začni od 0
+            const tmp = new Map(prev);
+            let volume = tmp.get(id);
             tmp.set(id, volume + 1);
             return tmp;
         });
     };
 
+    // Sníži položku -1
     const decreaseProduct = (id) => {
-        let tmp = new Map(D.dataShoppingCart);
-        let volume = tmp.get(id);
-        volume = volume > 0 ? --volume : 0;
-        tmp.set(id, volume);
-        D.setDataShoppingCart(tmp);
+        D.setDataShoppingCart((prev) => {
+            const tmp = new Map(prev);
+            let volume = tmp.get(id);
+            volume = volume > 0 ? --volume : 0;
+            tmp.set(id, volume);
+            return tmp;
+        });
     };
 
     return (

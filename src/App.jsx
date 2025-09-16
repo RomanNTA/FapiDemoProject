@@ -1,7 +1,7 @@
-import {useState, createContext} from "react";
-import {DataContext} from "./GlobalContext";
+import {useState} from "react";
 import "./App.css";
-import {Container, Row, Button, Tab, Tabs, Col} from "react-bootstrap";
+import {DataContext} from "./GlobalContext";
+import {Container, Row, Tab, Tabs, Col} from "react-bootstrap";
 import Customer from "./Components/Customer/Customer";
 import Opening from "./Components/Opening/Opening";
 import SelectGoods from "./Components/SelectGoods/SelectGoods";
@@ -10,7 +10,7 @@ import FullCart from "./Components/FullCart/FullCart";
 import Summary from "./Components/Summary/Summary";
 import LoadCurrencyRates from "./Components/LoadCurrencyRates/LoadCurrencyRates";
 
-import rawData from "./productData.json";
+import rawData from "./productData.json"; // Zdroj dat
 
 /**
  * Komponenta App - hlavní komponenta aplikace
@@ -19,7 +19,7 @@ function App() {
     //
     const [activeTab, setActiveTab] = useState("tab1");
     const [dataCustomer, setDataCustomer] = useState({});
-    const [dataProduct, setDataProduct] = useState(rawData.products);
+    const [dataProduct, setDataProduct] = useState(rawData.products); // Načítání dat (databáze) z JSON souboru
     const [dataShoppingCart, setDataShoppingCart] = useState(new Map());
     const [showOops, setShowOops] = useState(false);
     const [dataCurrencyRates, setDataCurrencyRates] = useState(null);
@@ -29,12 +29,7 @@ function App() {
      * metoda handleRegister přijímá data z komponenty Customer.jsx a ukládá je do stavu dataCustomer
      */
     const handleRegister = async (values) => {
-        console.log("Vstup -> handleRegister přijímá data z komponenty Customer.jsx a ukládá je do stavu dataCustomer");
         setDataCustomer(values);
-        console.log("Vstup -> dataCustomer ... Nyní by registrace měla být v pořádku.");
-        console.log(values);
-
-        // Nabídneme uživateli přechod na další záložku
         setActiveTab("tab3");
     };
 
@@ -42,28 +37,14 @@ function App() {
      * metoda addToCart přidá vybrané zboží do košíku
      */
     const addToCart = (product, countProducts) => {
-        console.log("Vstup -> addToCart přidá vybrané zboží do košíku");
-        console.log(product);
-        console.log(countProducts);
-
         // přišla nula počet nebo null, NaN
-        if (!Number.parseInt(countProducts)) {
-            console.log("addToCart : přišla nula počet nebo null, NaN");
-            console.log(product);
-            return;
-        }
+        if (!Number.parseInt(countProducts)) return;
 
         // Je registrovaný ? Můžeme vložit do košíku ?
         if (isNaN(dataCustomer) && !dataCustomer.isValid) {
-            console.log("addToCart : Je registrovaný ? Můžeme vložit do košíku ?");
-            console.log(dataCustomer);
             setShowOops(true);
             return;
         }
-
-        console.log(product);
-        console.log(countProducts);
-        console.log(dataShoppingCart);
 
         let newStatus;
         // přidání do košíku. Pokud je již obsažena položka, přičteme
@@ -73,12 +54,8 @@ function App() {
                 product.id,
                 Number.parseInt(newStatus.get(product.id) || 0) + Number.parseInt(countProducts || 0)
             );
-            console.log(newStatus);
             return newStatus;
         });
-
-        console.log(`Přidáno do košíku ${product.id}: ${product.name} - ${countProducts} ks/bal.`);
-        console.log(newStatus);
     };
 
     const handleCloseOops = () => {
@@ -87,7 +64,7 @@ function App() {
 
     /**
      * DataContextValues - hodnoty, které budou dostupné v rámci DataContext
-     * Musí být na konci ... až po inicializaci všech objektů !!!
+     * Musí to být na konci ... až po inicializaci všech objektů !!!
      */
     const DataContextValues = {
         dataCustomer,
@@ -112,7 +89,7 @@ function App() {
         <>
             <Container className=''>
                 <Row className='justify-content-center'>
-                    <h1 className='mt-4 mb-3 border-h1 font-header'>Máme pro Vás košík plný ovoce</h1>
+                    <h1 className='mt-4 mb-3 border-h1 font-header'>Košík plný ovoce</h1>
                 </Row>
             </Container>
 
@@ -148,8 +125,8 @@ function App() {
                                     <FullCart />
                                 </Col>
                                 <Col md={6} className=''>
-                                    <LoadCurrencyRates />
                                     <Summary />
+                                    <LoadCurrencyRates />
                                 </Col>
                             </div>
                         </Tab>
@@ -158,8 +135,6 @@ function App() {
                 </Container>
                 <Oops show={showOops} handleClose={handleCloseOops} />
             </DataContext.Provider>
-
-            {/* mt-auto py-3 bg-light */}
 
             <footer className='bg-light '>
                 <Container>

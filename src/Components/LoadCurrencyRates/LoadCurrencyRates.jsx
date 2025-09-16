@@ -1,20 +1,32 @@
 import React, {useState, useEffect, useContext} from "react";
 import "./LoadCurrencyRates.css";
 import {DataContext} from "./../../GlobalContext";
-import {Container, Row, Button, Tab, Tabs, Col, Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 
 import axios from "axios";
 
-//const urlServerApiCNB = `https://api.cnb.cz/cnbapi/exrates/daily?date=${(new Date().toISOString()).slice(0,10)} &lang=CZ"`;
-//const urlServerApiCNB = `https://api.cnb.cz/cnbapi/exrates/daily?date=2025-09-14&lang=CZ`;
+/**
+ * URI ČNB ... https://api.cnb.cz/cnbapi/exrates/daily?date=2025-09-14&lang=CZ
+ */
 
-// produkce ... proxy přes PHP script.
-// const urlServerApiCNB = https://projects.sliva-roman.cz/project9/cnbapi/exrates/daily?date=2025-09-14
+/**
+ *  urlServerApiCNB ... část adresy
+ *
+ *  Používá se napodobenina proxy serveru pro uploading dat z ČNB.
+ *
+ *  local ... upravený defineConfig.js
+ *  produkce ... PHP skript, který simuluje proxy server
+ */
+//const urlServerApiCNB = `/cnbapi/exrates/daily`;
 
-const urlServerApiCNB = `/cnbapi/exrates/daily`;
+/**
+ * produkce ... proxy přes PHP script.
+ *
+ */
+const urlServerApiCNB = `https://projects.sliva-roman.cz/project9/cnbapi/exrates/daily`;
+// https://projects.sliva-roman.cz/project9/cnbapi/exrates/daily?date=2025-09-14
 
 export const RateKc = {
-    //validFor: rates[0]?.validFor,
     validFor: new Date().toISOString().slice(0, 10),
     order: 0,
     country: "Česká republika",
@@ -26,20 +38,21 @@ export const RateKc = {
 
 function EditAndSendRates(rates) {
     //
-    console.log("rates -> EDIT ", rates);
     if (!isNaN(rates)) return null;
     //
     let tmp;
     try {
         tmp = [RateKc, ...rates];
-        console.log("rates <- EDIT ", tmp);
     } catch (error) {
         console.log("ERROR rates <- EDIT ", tmp);
     }
     return tmp;
 }
 
-// Fetch dat ze servru ... výsup je pole JSONů
+/**
+ *  Fetch dat ze servru ... výsup je pole JSONů
+ */
+
 async function LoadRates() {
     //
     let data = null;
@@ -114,20 +127,11 @@ export default function SelectRates() {
     return (
         <>
             <div className='d-flex align-items-start'>
-                <h5 className='headColor'>Vyběr měny</h5>
+                <h5 className='headColor'>Výběr měny</h5>
             </div>
             <div className='d-flex align-items-start'>
                 {/* výběr měny */}
                 <Form.Select
-                    // let tmpKc = {
-                    //     validFor: rates[0]?.validFor,
-                    //     order: 0,
-                    //     country: "Česká republika",
-                    //     currency: "Kč",
-                    //     amount: 1,
-                    //     currencyCode: "CZK",
-                    //     rate: 1.0,
-                    // };
                     value={D.selectedCurrency || "chybí ..."}
                     onChange={(e) => D.setSelectedCurrency(e.target.value)}>
                     {!D.dataCurrencyRates && <option value=''>-- vyběr měny -- </option>}
@@ -140,7 +144,6 @@ export default function SelectRates() {
             </div>
 
             {/* tlačítko pro ruční refresh */}
-
             <div className='d-flex justify-content-end'>
                 <Button onClick={refreshRates} disabled={loading} className='n-button-rate py-2'>
                     <small>{loading ? "Načítám..." : "Aktualizovat kurzy"}</small>
@@ -149,13 +152,3 @@ export default function SelectRates() {
         </>
     );
 }
-
-// {
-//     "validFor": "2025-09-15",
-//     "order": 179,
-//     "country": "Austrálie",
-//     "currency": "dolar",
-//     "amount": 1,
-//     "currencyCode": "AUD",
-//     "rate": 13.772
-// }

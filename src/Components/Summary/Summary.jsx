@@ -1,7 +1,7 @@
 import React from "react";
 import "./Summary.css";
 import {useState, useContext, useEffect} from "react";
-import {Container, Col, Button, Card, ListGroup} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import {DataContext} from "../../GlobalContext";
 
 function Summary() {
@@ -10,23 +10,25 @@ function Summary() {
     const [bilt, setBilt] = useState("");
     const [customer, setCustomer] = useState("");
 
+    // aktualizace při změně customera
     useEffect(() => {
         AddressCustomer();
     }, [D.dataCustomer]);
 
-    // let tmp = 0;
-    // D.setSelectedCurrency(tmp);
-
+    // aktualizace při změně košíku nebo měny
     useEffect(() => {
         calculateBilt();
     }, [D.dataShoppingCart, D.selectedCurrency]);
-
+    [];
+    /**
+     * Sestavení účtenky (poskládaní textu)
+     */
     const calculateBilt = () => {
         //
         if (!isNaN(D.dataCurrencyRates)) return;
         let rat = D.dataCurrencyRates[D.selectedCurrency];
 
-        console.log("calculateBilt rat ", rat);
+        // console.log("calculateBilt rat ", rat);
         // "validFor": "2025-09-16",
         // "order": 180,
         // "country": "Indonesie",
@@ -34,13 +36,14 @@ function Summary() {
         // "amount": 1000,
         // "currencyCode": "IDR",
         // "rate": 1.254
-        console.log("calculateBilt dataShoppingCart ", D.dataShoppingCart);
+
+        // console.log("calculateBilt dataShoppingCart ", D.dataShoppingCart);
         // new Map([
         //     [4, 2],
         //     [2, 3],
         // ]);
 
-        console.log("calculateBilt dataCustomer ", D.dataCustomer);
+        // console.log("calculateBilt dataCustomer ", D.dataCustomer);
         // "isValid": true,
         // "email": "",
         // "firstName": "",
@@ -50,12 +53,12 @@ function Summary() {
         // "city": "",
         // "zipCode": ""
 
-        console.log("calculateBilt dataProduct ", D.dataProduct);
-        //     "id": 1,
-        //     "name": "Rybíz červený",
-        //     "desc": "Červený rybíz, vanička, 125 g.",
-        //     "price": 59.9,
-        //     "img": "id1-860x800x1_5s2pq243pmp7.webp"
+        // console.log("calculateBilt dataProduct ", D.dataProduct);
+        // "id": 1,
+        // "name": "Rybíz červený",
+        // "desc": "Červený rybíz, vanička, 125 g.",
+        // "price": 59.9,
+        // "img": "id1-860x800x1_5s2pq243pmp7.webp"
 
         let result = [];
         let sumByCurrency = 0.0;
@@ -86,8 +89,6 @@ function Summary() {
         });
 
         const len = result[0]?.length || 30;
-        console.log("result", result);
-        console.log("sumByCurrency", sumByCurrency);
 
         let tmp, footer, separator;
         if (result.length == 0) {
@@ -99,12 +100,12 @@ function Summary() {
             tmp = Number(sumByCurrency).toFixed(2) + " " + rat?.currencyCode;
             footer = tmp.padStart(len, " ");
         }
-        console.log("tmp", tmp);
-        console.log("sumByCurrency", sumByCurrency);
-
         setBilt([headerBilt, separator, ...result, separator, footer].join("\n"));
     };
 
+    /**
+     * Sestavení adresy customera
+     */
     const AddressCustomer = () => {
         const cust = D.dataCustomer;
         if (!cust.isValid) return;
@@ -118,14 +119,6 @@ function Summary() {
         result.push(`email:  ${cust.email}, tel: ${cust.phone}`);
         result.push(`Adr: ${cust.street}`);
         result.push(`${cust.city}   PSČ: ${cust.zipCode}`);
-
-        // "email": "",
-        // "firstName": "",
-        // "lastName": "",
-        // "phone": "",
-        // "street": "",
-        // "city": "",
-        // "zipCode": ""
 
         setCustomer(result.join("\n"));
     };

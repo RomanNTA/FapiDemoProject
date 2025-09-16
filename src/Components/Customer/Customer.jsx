@@ -1,16 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import {useState} from "react";
 import "./Customer.css";
-import {
-    Form,
-    Col,
-    Row,
-    FloatingLabel,
-    InputGroup,
-    Button,
-} from "react-bootstrap";
+import {Form, Col, Row, FloatingLabel, Button} from "react-bootstrap";
 
-function Customer({ setDataCustomer }) {
+function Customer({setDataCustomer}) {
     // const EMAIL_REGEX =
     const EMAIL_REGEX = /\b[\w\.-]+@([\w\.-]+\.\w{2,4}\b)/;
 
@@ -48,16 +41,13 @@ function Customer({ setDataCustomer }) {
             if (form.checkValidity() === false) {
                 console.log("Chyba ve formuláři !");
             } else {
-                let tmp = { ...dataForm, isValid: true };
-                console.log(tmp);
+                let tmp = {...dataForm, isValid: true};
                 setDataCustomer(tmp);
             }
         } catch (error) {
             console.log("Vyjímka ve formuláři !");
             console.log(error);
         }
-
-        console.log("Odesílám formulář !");
         setValidated(true);
     };
 
@@ -66,11 +56,9 @@ function Customer({ setDataCustomer }) {
      */
     const handleInputForm = (e) => {
         const [val, name, id] = [e.target.value, e.target.name, e.target.id];
-        let tmp = { ...dataForm, [name]: val };
+        let tmp = {...dataForm, [name]: val};
         setDataForm(tmp);
     };
-
-    //        <Form noValidate validated={validated}  onInvalid={handleSubmit}>
 
     return (
         <>
@@ -95,17 +83,13 @@ function Customer({ setDataCustomer }) {
                                 placeholder='' // musí být uvedený prázdný !!!!!!!!
                             />
                             <Form.Control.Feedback type='invalid'>
-                                Zadejte platné jméno (pouze alfanumerické znaky
-                                a diakritika).
+                                Zadejte platné jméno (pouze alfanumerické znaky a diakritika).
                             </Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
                     {/* ------------------ LAST NAME ------------------ */}
                     <Form.Group as={Col} md='6'>
-                        <FloatingLabel
-                            controlId='idLastName'
-                            label='&nbsp;&nbsp;&nbsp;příjmení'
-                            className='mb-3'>
+                        <FloatingLabel controlId='idLastName' label='&nbsp;&nbsp;&nbsp;příjmení' className='mb-3'>
                             <Form.Control
                                 className='bg-white rounded-5 ps-4'
                                 type='text'
@@ -117,8 +101,7 @@ function Customer({ setDataCustomer }) {
                                 placeholder='' // musí být uvedený prázdný !!!!!!!!
                             />
                             <Form.Control.Feedback type='invalid'>
-                                Prosím, zadejte příjmení (pouze alfanumerické
-                                znaky a diakritika).
+                                Prosím, zadejte příjmení (pouze alfanumerické znaky a diakritika).
                             </Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
@@ -127,10 +110,7 @@ function Customer({ setDataCustomer }) {
                 <Row>
                     {/* ------------------ PHONE ------------------ */}
                     <Form.Group as={Col} md='3'>
-                        <FloatingLabel
-                            controlId='idPhone'
-                            label='&nbsp;&nbsp;&nbsp;telefonní číslo'
-                            className='mb-3'>
+                        <FloatingLabel controlId='idPhone' label='&nbsp;&nbsp;&nbsp;telefonní číslo' className='mb-3'>
                             <Form.Control
                                 className='bg-white rounded-5 ps-4'
                                 type='text'
@@ -164,9 +144,7 @@ function Customer({ setDataCustomer }) {
                                 value={dataForm.email || ""}
                                 placeholder='' // musí být uvedený prázdný !!!!!!!!
                             />
-                            <Form.Control.Feedback type='invalid'>
-                                Prosím, zadejte platný email.
-                            </Form.Control.Feedback>
+                            <Form.Control.Feedback type='invalid'>Prosím, zadejte platný email.</Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
                     {/* ------------------ ADRESA - ULICE ------------------ */}
@@ -174,10 +152,7 @@ function Customer({ setDataCustomer }) {
 
                 <Row>
                     <Form.Group as={Col} md='5'>
-                        <FloatingLabel
-                            controlId='idStreet'
-                            label='&nbsp;&nbsp;&nbsp;Ulice'
-                            className='mb-3'>
+                        <FloatingLabel controlId='idStreet' label='&nbsp;&nbsp;&nbsp;Ulice' className='mb-3'>
                             <Form.Control
                                 className='bg-white rounded-5 ps-4'
                                 type='text'
@@ -189,17 +164,13 @@ function Customer({ setDataCustomer }) {
                                 placeholder='' // musí být uvedený prázdný !!!!!!!!
                             />
                             <Form.Control.Feedback type='invalid'>
-                                Prosím, zadejte ulici a čísla. např. "Dlouhá
-                                12/2020".
+                                Prosím, zadejte ulici a čísla. např. "Dlouhá 12/2020".
                             </Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
                     {/* ------------------ ADRESA - MĚSTO ------------------ */}
                     <Form.Group as={Col} md='5'>
-                        <FloatingLabel
-                            controlId='idCity'
-                            label='&nbsp;&nbsp;&nbsp;Město'
-                            className='mb-3'>
+                        <FloatingLabel controlId='idCity' label='&nbsp;&nbsp;&nbsp;Město' className='mb-3'>
                             <Form.Control
                                 className='bg-white rounded-5 ps-4'
                                 type='text'
@@ -217,10 +188,7 @@ function Customer({ setDataCustomer }) {
                     </Form.Group>
                     {/* ------------------ ADRESA - PSČ ------------------ */}
                     <Form.Group as={Col} md='2'>
-                        <FloatingLabel
-                            controlId='idZipCode'
-                            label='&nbsp;&nbsp;&nbsp;PSČ'
-                            className='mb-3'>
+                        <FloatingLabel controlId='idZipCode' label='&nbsp;&nbsp;&nbsp;PSČ' className='mb-3'>
                             <Form.Control
                                 className='bg-white rounded-5 ps-4'
                                 type='text'
@@ -232,17 +200,14 @@ function Customer({ setDataCustomer }) {
                                 placeholder='' // musí být uvedený prázdný !!!!!!!!
                             />
                             <Form.Control.Feedback type='invalid'>
-                                Prosím, zadejte směrovací číslo (5 čísel bez
-                                mezer).
+                                Prosím, zadejte směrovací číslo (5 čísel bez mezer).
                             </Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
                 </Row>
 
                 <Col className='d-flex justify-content-center m-5'>
-                    <Button
-                        type='submit'
-                        className='n-button-send  rounded-5 px-4 py-2 fw-bold'>
+                    <Button type='submit' className='n-button-send  rounded-5 px-4 py-2 fw-bold'>
                         Mám hotovo ... ukaž mi ovoce
                     </Button>
                 </Col>
