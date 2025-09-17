@@ -6,7 +6,6 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
   list-style: none;
   text-decoration: none;
 }
@@ -11991,13 +11990,9 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-/*
-import "../../../node_modules/leaflet/dist/leaflet.css"; // Důležité pro stylování
-*/
 html,
 body {
   height: 100%;
-  margin: 0;
 }
 
 body {
@@ -12041,26 +12036,6 @@ footer {
 }
 
 /* ------------------ testovací prvky ------------------- */
-.b {
-  border: 2px solid red;
-}
-
-.c {
-  border: 2px solid lime;
-}
-
-.d {
-  border: 2px solid purple;
-}
-
-.e {
-  border: 2px solid blue;
-}
-
-.f {
-  border: 2px solid yellow;
-}
-
 .headColor {
   color: rgb(255, 87, 34) !important;
 }
