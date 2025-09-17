@@ -37,7 +37,7 @@ function SelectGoods() {
                         <Card.Title className='d-flex justify-content-center fw-bold text-wrap font5'>
                             {i.name}
                         </Card.Title>
-[]
+
                         <Card.Text className='font2'>{i.desc}</Card.Text>
 
                         <h3 className='mt-auto font3'>
